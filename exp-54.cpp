@@ -1,15 +1,7 @@
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
-
-
-int main() {
-    int arr[5] = {0,1,2,3,4};
-    int *p = arr;  
-    
-    for (int i = 0; i<5; i++){
-        cout<<*p<<endl;
-        p++;
-    }
-    return 0;
+int main(){
+  cout<<setw(10)<<fixed<<setprecision(2)<<3.14159<<endl;
+  return 0;
 }

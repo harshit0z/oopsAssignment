@@ -1,28 +1,10 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-class Device {
-public:
-    virtual void turnOn()=0;
-    virtual ~Device(){}
-};
-
-class Laptop: public Device {
-public:
-    void turnOn(){ cout<<"Laptop turned on"<<endl; }
-};
-
-class Smartphone: public Device {
-public:
-    void turnOn(){ cout<<"Smartphone turned on"<<endl; }
-};
-
 int main(){
-    Device* d1=new Laptop();
-    Device* d2=new Smartphone();
-    d1->turnOn();
-    d2->turnOn();
-    delete d1;
-    delete d2;
-    return 0;
+  ofstream out("file.bin", ios::binary);
+  int arr[] = {1,2,3,4,5};
+  out.write((char*)arr, sizeof(arr));
+  out.close();
+  return 0;
 }

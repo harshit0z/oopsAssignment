@@ -1,28 +1,14 @@
 #include <iostream>
-
+#include <fstream>
 using namespace std;
-
-class Payment{
-
-    public:
-        virtual void processPayment()=0;
-
-};
-
-class CreditCardPayment: public Payment{
-    public :
-    void processPayment() override{cout<<"Processing CreditCardPayment"<<endl;}
-};
-
-class DebitCardPayment: public Payment{
-    public :
-        void processPayment() override{cout<<"Processing CreditCardPayment"<<endl;}
-};
-
-int main() {
-    Payment *p = new CreditCardPayment();
-    p->processPayment();
-    p = new DebitCardPayment();
-    p->processPayment();  
-    return 0;
+int main(){
+  ifstream in("file.bin", ios::binary);
+  char buffer[1024];
+  in.read(buffer, sizeof(buffer));
+  int bytes = in.gcount();
+  for(int i=0; i<bytes; i++){
+    cout<<hex<<(int)(unsigned char)buffer[i]<<" ";
+  }
+  in.close();
+  return 0;
 }

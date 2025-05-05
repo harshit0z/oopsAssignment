@@ -1,14 +1,12 @@
 #include <iostream>
+#include <iomanip>
 using namespace std;
-
 int main(){
-    int n=5;
-    int* arr = new int[n];
-    for(int i=0;i<n;i++)
-        *(arr+i)=i*10;
-    for(int i=0;i<n;i++)
-        cout<<*(arr+i)<<" ";
-    cout<<endl;
-    delete[] arr;
-    return 0;
+  string name;
+  int age;
+  double salary;
+  cout<<"Enter Name  age and salary one by one"<<endl;
+  cin>>name>>age>>salary;
+  cout<<left<<setw(10)<<name<<setw(5)<<age<<fixed<<setprecision(2)<<salary;
+  return 0;
 }

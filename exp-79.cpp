@@ -1,14 +1,17 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-template <typename T>
-T maxVal(T a, T b) {
-    return (a > b) ? a : b;
-}
-
 int main(){
-    cout<<maxVal(10, 20)<<endl;
-    cout<<maxVal(3.5, 2.9)<<endl;
-    cout<<maxVal('a', 'z')<<endl;
-    return 0;
+  ofstream out("file.bin", ios::binary);
+  int x=12345;
+  out.write((char*)&x, sizeof(x));
+  out.close();
+
+  ifstream in("file.bin", ios::binary);
+  int y=0;
+  in.read((char*)&y, sizeof(y));
+  cout<<y;
+  in.close();
+
+  return 0;
 }

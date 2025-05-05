@@ -1,18 +1,20 @@
 #include <iostream>
+#include <fstream>
+#include <string>
 using namespace std;
-
-class Base {
-public:
-    virtual ~Base() { cout<<"Base destructor"<<endl; }
-};
-
-class Derived : public Base {
-public:
-    ~Derived() { cout<<"Derived destructor"<<endl; }
-};
-
-int main() {
-    Base* b = new Derived();
-    delete b;
-    return 0;
+int main(){
+  ofstream out("editor.txt");
+  string line;
+  while(true){
+    getline(cin,line);
+    if(line=="EXIT") break;
+    out<<line<<endl;
+  }
+  out.close();
+  ifstream in("editor.txt");
+  while(getline(in,line)){
+    cout<<line<<endl;
+  }
+  in.close();
+  return 0;
 }

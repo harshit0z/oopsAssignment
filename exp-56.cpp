@@ -1,21 +1,16 @@
 #include <iostream>
-
+#include <fstream>
 using namespace std;
-
-void swap(int *, int *);
-
-int main() {
-    int a = 2, b = 5;
-    cout<<"a = "<<a<<" b = "<<b<<endl;
-    swap(&a, &b);
-    cout<<"a = "<<a<<" b = "<<b;
+int main(){
+    ofstream out("file.txt");
+    out<<"hello";
+    out.close();
+    ifstream in("file.txt");
+    string s;
+    in>>s;
+    cout<<s<<" = s";
+    in.close();
+    
     
     return 0;
-}
-
-void swap(int *a, int * b){
-    int temp = *a;
-    *a = *b;
-    *b = temp;
-    cout<<"Swaped"<<endl;
 }

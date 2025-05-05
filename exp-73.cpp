@@ -1,16 +1,20 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
+struct Data{
+  int id;
+  double value;
+  char name[20];
+};
 int main(){
-    try {
-        int choice;
-        cin >> choice;
-        if(choice == 1) throw 10;
-        else if(choice == 2) throw 3.14;
-        else if(choice == 3) throw "Error occurred";
-    }
-    catch(int e) { cout << "Caught int: " << e << endl; }
-    catch(double e) { cout << "Caught double: " << e << endl; }
-    catch(const char* e) { cout << "Caught string: " << e << endl; }
-    return 0;
+  Data d1 = {1, 3.14, "sample"};
+  ofstream out("data.bin", ios::binary);
+  out.write((char*)&d1, sizeof(d1));
+  out.close();
+  Data d2;
+  ifstream in("data.bin", ios::binary);
+  in.read((char*)&d2, sizeof(d2));
+  in.close();
+  cout<<d2.id<<' '<<d2.value<<' '<<d2.name;
+  return 0;
 }

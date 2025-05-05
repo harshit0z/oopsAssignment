@@ -1,32 +1,44 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-class Base {
-public:
-    virtual void show() { cout<<"Base class"<<endl; }
-};
-
-class Derived1: public Base {
-public:
-    void show() override { cout<<"Derived1 class"<<endl; }
-};
-
-class Derived2: public Base {
-public:
-    void show() override { cout<<"Derived2 class"<<endl; }
-};
-
-void display(Base* b) {
-    b->show();
-}
-
-int main() {
-    Base b;
-    Derived1 d1;
-    Derived2 d2;
-
-    display(&b);
-    display(&d1);
-    display(&d2);
-    return 0;
+int main(int argc,char* argv[]){
+  if(argc!=2) return 1;
+  ifstream in;
+  ofstream out;
+  if(string(argv[1])=="compress"){
+    in.open("input.txt",ios::binary);
+    out.open("compressed.bin",ios::binary);
+    char prev=0,c;
+    int count=0;
+    while(in.get(c)){
+      if(c==prev&&count<255){
+        count++;
+      }else{
+        if(count>0){
+          out.put(count);
+          out.put(prev);
+        }
+        prev=c;
+        count=1;
+      }
+    }
+    if(count>0){
+      out.put(count);
+      out.put(prev);
+    }
+    in.close();
+    out.close();
+  }else if(string(argv[1])=="decompress"){
+    in.open("compressed.bin",ios::binary);
+    out.open("output.txt",ios::binary);
+    char count,c;
+    while(in.get(count)&&in.get(c)){
+      for(int i=0;i<(unsigned char)count;i++) out.put(c);
+    }
+    in.close();
+    out.close();
+  }else{
+    return 1;
+  }
+  return 0;
 }

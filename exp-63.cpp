@@ -1,31 +1,10 @@
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
-
-class Vehicle{
-
-    public:
-        virtual void pasangers() = 0;
-};
-
-class Bike:public Vehicle{
-    public:
-        void pasangers() override{
-            cout<<"Riders = 2"<<endl;
-        }
-};
-
-class Car:public Vehicle{
-    public: 
-        void pasangers() override{
-            cout<<"Pasangers = 4"<<endl;
-        }
-};
-
-int main() {
-    Vehicle *v = new Car();
-    v->pasangers();
-    v = new Bike();
-    v->pasangers();
-    return 0;
+int main(){
+  double num = 123.456789;
+  cout << fixed << setprecision(2) << num << endl;
+  cout << fixed << setprecision(4) << num << endl;
+  cout << fixed << setprecision(6) << num << endl;
+  return 0;
 }

@@ -1,35 +1,21 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-template <typename T>
-class Queue {
-    T arr[100];
-    int front, rear;
-public:
-    Queue(): front(0), rear(0) {}
-    void enqueue(T val) {
-        if(rear==100) return;
-        arr[rear++]=val;
-    }
-    void dequeue() {
-        if(front==rear) return;
-        front++;
-    }
-    void display() {
-        for(int i=front;i<rear;i++)
-            cout<<arr[i]<<" ";
-        cout<<endl;
-    }
-    bool isEmpty() { return front==rear; }
+struct Data{
+  int a;
+  double b;
 };
-
 int main(){
-    Queue<int> q;
-    q.enqueue(10);
-    q.enqueue(20);
-    q.enqueue(30);
-    q.display();
-    q.dequeue();
-    q.display();
-    return 0;
+  Data d1 = {10, 3.14};
+  ofstream out("data.bin", ios::binary);
+  out.write((char*)&d1, sizeof(d1));
+  out.close();
+
+  Data d2;
+  ifstream in("data.bin", ios::binary);
+  in.read((char*)&d2, sizeof(d2));
+  in.close();
+
+  cout<<d2.a<<' '<<d2.b;
+  return 0;
 }

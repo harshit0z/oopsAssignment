@@ -1,18 +1,9 @@
 #include <iostream>
-
 using namespace std;
-
-class Box{
-
-    public:
-        Box ret(){
-            return *this;
-        }
-};
-
-int main() {
-    Box b;
-    b.ret(); // b.ret returns Box type
-
-    return 0;
+int main(){
+  char c;
+  while((c=cin.get())!=EOF){
+    cout.put(c);
+  }
+  return 0;
 }

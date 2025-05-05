@@ -1,41 +1,13 @@
 #include <iostream>
-
 using namespace std;
+int main(){
+  int n,sum=0;
+  while(true){
+    cout<<"Enter a Number "<<endl;
+    cin>>n;
+    sum+=n;
+    cout<<"Sum = "<<sum<<endl;
 
-class Animal{
-
-    public:
-        virtual void speak() = 0;
-};
-
-class Dog: public Animal{
-    public :
-        void speak() override{
-            cout<<"Bhau Bhau"<<endl;
-        }
-};
-
-class Cat: public Animal{
-    public :
-        void speak() override{
-            cout<<"Meow Meow"<<endl;
-        }
-};
-
-class Bird: public Animal{
-    public :
-        void speak() override{
-            cout<<"iiiii iiii iii ii "<<endl;
-        }
-};
-
-
-int main() {
-    Dog d;
-    Cat c;
-    Bird b;
-    d.speak();
-    c.speak();
-    b.speak();   
-    return 0;
+  }
+  return 0;
 }

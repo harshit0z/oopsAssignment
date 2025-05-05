@@ -1,28 +1,32 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-template <typename T>
-class SafeArray {
-    T* arr;
-    int size;
-public:
-    SafeArray(int s): size(s) { arr = new T[size]; }
-    ~SafeArray() { delete[] arr; }
-    T& operator[](int i) {
-        if(i < 0 || i >= size) throw out_of_range("Index out of bounds");
-        return arr[i];
-    }
-    int getSize() { return size; }
+struct Record{
+  int id;
+  char name[20];
 };
+int main(){
+  fstream file("records.bin", ios::in | ios::out | ios::binary | ios::trunc);
+  Record r1 = {1, "Kutta"};
+  Record r2 = {2, "billa"};
+  Record r3 = {3, "bakri"};
+  file.write((char*)&r1, sizeof(r1));
+  file.write((char*)&r2, sizeof(r2));
+  file.write((char*)&r3, sizeof(r3));
 
-int main() {
-    SafeArray<int> sa(5);
-    try {
-        for(int i=0; i<sa.getSize(); i++) sa[i] = i*2;
-        cout<<sa[2]<<endl;
-        cout<<sa[5]<<endl; // will throw
-    } catch (out_of_range& e) {
-        cout<<"Exception: "<<e.what()<<endl;
-    }
-    return 0;
+  Record r;
+  file.seekg(sizeof(Record));
+  file.read((char*)&r, sizeof(r));
+  if(r.id==2){
+    r.id=20;
+    file.seekp(sizeof(Record));
+    file.write((char*)&r, sizeof(r));
+  }
+
+  file.seekg(0);
+  while(file.read((char*)&r, sizeof(r))){
+    cout<<r.id<<' '<<r.name<<endl;
+  }
+  file.close();
+  return 0;
 }

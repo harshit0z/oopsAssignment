@@ -1,17 +1,15 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
-
-int divide(int a,int b){
-    if(b==0) throw "Division by zero";
-    return a/b;
-}
-
 int main(){
-    int x=10,y=0;
-    try {
-        cout<<divide(x,y)<<endl;
-    } catch(const char* e) {
-        cout<<"Error: "<<e<<endl;
-    }
-    return 0;
+  fstream file("data.txt", ios::in | ios::out | ios::app);
+  if(!file) return 1;
+  file<<"Hello\n";
+  file.seekg(0);
+  string line;
+  while(getline(file,line)){
+    cout<<line<<endl;
+  }
+  file.close();
+  return 0;
 }

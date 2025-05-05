@@ -1,36 +1,18 @@
 #include <iostream>
-
+#include <fstream>
+#include <string>
 using namespace std;
+int main(){
+    ofstream out("file.txt");
+    string s;
+    while (getline(cin, s))
+    {
+        cout<<"Enter something"<< endl;
 
-class Appliance{
-
-    public:
-        virtual void func(){cout<<"Appliance does something, i don't know what."<<endl;}
-};
-
-class WashingMachine: public Appliance{
-    public:
-        void func() override{cout<<"WashingMachine washes clothes."<<endl;}
-};
-
-class Refrigerator: public Appliance{
-    public :
-        void func() override{cout<<"Refrigerator can freez an ice-creame for you."<<endl;}
-};
-
-class Microwave: public Appliance{
-    public :
-        void func() override{cout<<"Microwave is baking my biscuits";}
-};
-
-int main() {
-    Appliance  *a;
-    a->func();
-    a = new WashingMachine();
-    a->func();
-    a = new Refrigerator();
-    a->func();
-    a = new Microwave();
-    a->func();  
+        if (s == "")
+            break;
+        out << s << endl;
+    }
+    out.close();
     return 0;
 }

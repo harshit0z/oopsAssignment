@@ -1,26 +1,14 @@
 #include <iostream>
-
+#include <fstream>
+#include <string>
 using namespace std;
-
-class Book{
-
-    public:
-        int id;
-};
-
-int main() {
-    Book *b ;
-    Book arr[5];
-
-    for(int i = 0; i<5; i++){
-        b = new Book();
-        b->id = i;
-        arr[i] = *b;
-    }
-
-    for(int i = 0; i<5; i++){
-        cout<<arr[i].id<<endl;
-    }
-
-    return 0;
+int main(){
+  ofstream file("strings.txt");
+  string s;
+  for(int i=0;i<3;i++){
+    cin>>s;
+    file<<s<<endl;
+  }
+  file.close();
+  return 0;
 }

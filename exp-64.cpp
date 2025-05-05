@@ -1,30 +1,10 @@
 #include <iostream>
-
+#include <iomanip>
 using namespace std;
-
-class Shape{
-
-    public:
-        virtual void draw(){cout<<"Drawing a shape"<<endl;}
-};
-
-class Circle: public Shape{
-    public :
-    void draw() override{cout<<"Drawing a circle"<<endl;}
-};
-
-class Square:public Shape{
-    public :
-        void draw() override{cout<<"Drawing a square"<<endl;}
-};
-
-int main() {
-    Shape *s;
-    Circle c;
-    Square sq;
-    s = &c;
-    s->draw();
-    s = &sq;
-    s->draw();
-    return 0;
+int main(){
+  cout<<setw(10)<<"Name"<<setw(8)<<"Age"<<endl;
+  cout<<setw(10)<<"Raju"<<setw(8)<<23<<endl;
+  cout<<setw(10)<<"Golu"<<setw(8)<<30<<endl;
+  cout<<setw(10)<<"Gamchhadhari"<<setw(8)<<28<<endl;
+  return 0;
 }
