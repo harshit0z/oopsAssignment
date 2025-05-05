@@ -1,20 +1,13 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    int num = 12345, remainder = 0, reversed = 0;
+double area(int);
 
-    while(num!=0){
-        remainder = num%10;
-
-        reversed = (reversed*10)+remainder;
-
-        num /= 10;
-    }
-
-    cout<<reversed;
-
-
- 
+int main() {
+    cout<<"Area = "<<area(5);
     return 0;
 }
+
+
+double area(int r) {return 3.14*r*r;}

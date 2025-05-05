@@ -1,34 +1,28 @@
 #include <iostream>
 using namespace std;
 
-class Library {
-private:
-    int privateData;
-protected:
-    int protectedData;
+template <typename T>
+class SafeArray {
+    T* arr;
+    int size;
 public:
-    int publicData;
-    Library() { privateData=1; protectedData=2; publicData=3; }
-    void showAll() {
-        cout<<privateData<<" "<<protectedData<<" "<<publicData<<endl;
+    SafeArray(int s): size(s) { arr = new T[size]; }
+    ~SafeArray() { delete[] arr; }
+    T& operator[](int i) {
+        if(i < 0 || i >= size) throw out_of_range("Index out of bounds");
+        return arr[i];
     }
+    int getSize() { return size; }
 };
 
-class Derived: public Library {
-public:
-    void access() {
-        cout<<protectedData<<endl;
-        cout<<publicData<<endl;
+int main() {
+    SafeArray<int> sa(5);
+    try {
+        for(int i=0; i<sa.getSize(); i++) sa[i] = i*2;
+        cout<<sa[2]<<endl;
+        cout<<sa[5]<<endl; // will throw
+    } catch (out_of_range& e) {
+        cout<<"Exception: "<<e.what()<<endl;
     }
-};
-
-int main(){
-    Library lib;
-    cout<<lib.publicData<<endl;
-    lib.showAll();
-
-    Derived d;
-    d.access();
-
     return 0;
 }

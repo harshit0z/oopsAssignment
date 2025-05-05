@@ -1,29 +1,28 @@
 #include <iostream>
 using namespace std;
 
-class Fraction {
-    int num, den;
+class Device {
 public:
-    Fraction(int n=0, int d=1):num(n), den(d){}
-    friend ostream& operator<<(ostream& out, const Fraction& f);
-    friend istream& operator>>(istream& in, Fraction& f);
+    virtual void turnOn()=0;
+    virtual ~Device(){}
 };
 
-ostream& operator<<(ostream& out, const Fraction& f) {
-    out<<f.num<<"/"<<f.den;
-    return out;
-}
+class Laptop: public Device {
+public:
+    void turnOn(){ cout<<"Laptop turned on"<<endl; }
+};
 
-istream& operator>>(istream& in, Fraction& f) {
-    char sep;
-    in>>f.num>>sep>>f.den;
-    return in;
-}
+class Smartphone: public Device {
+public:
+    void turnOn(){ cout<<"Smartphone turned on"<<endl; }
+};
 
-int main() {
-    Fraction f;
-    cout<<"Enter fraction (num/den):";
-    cin>>f;
-    cout<<"You entered: "<<f<<endl;
+int main(){
+    Device* d1=new Laptop();
+    Device* d2=new Smartphone();
+    d1->turnOn();
+    d2->turnOn();
+    delete d1;
+    delete d2;
     return 0;
 }

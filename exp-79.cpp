@@ -1,30 +1,14 @@
 #include <iostream>
 using namespace std;
 
-class Vehicle {
-public:
-    virtual void show()=0;
-    virtual ~Vehicle(){}
-};
-
-class Car: public Vehicle {
-public:
-    void show(){ cout<<"Car"<<endl; }
-};
-
-class Bike: public Vehicle {
-public:
-    void show(){ cout<<"Bike"<<endl; }
-};
+template <typename T>
+T maxVal(T a, T b) {
+    return (a > b) ? a : b;
+}
 
 int main(){
-    Vehicle* v1=new Car();
-    Vehicle* v2=new Bike();
-
-    v1->show();
-    v2->show();
-
-    delete v1;
-    delete v2;
+    cout<<maxVal(10, 20)<<endl;
+    cout<<maxVal(3.5, 2.9)<<endl;
+    cout<<maxVal('a', 'z')<<endl;
     return 0;
 }

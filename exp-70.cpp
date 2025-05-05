@@ -1,19 +1,28 @@
 #include <iostream>
+
 using namespace std;
 
-class Complex {
-    int real, imag;
-public:
-    Complex(int r=0,int i=0):real(r),imag(i){}
-    Complex operator+(const Complex& c) {
-        return Complex(real+c.real, imag+c.imag);
-    }
-    void show(){cout<<real<<"+"<<imag<<"i"<<endl;}
+class Payment{
+
+    public:
+        virtual void processPayment()=0;
+
 };
 
-int main(){
-    Complex c1(2,3), c2(4,5), c3;
-    c3 = c1 + c2;
-    c3.show();
+class CreditCardPayment: public Payment{
+    public :
+    void processPayment() override{cout<<"Processing CreditCardPayment"<<endl;}
+};
+
+class DebitCardPayment: public Payment{
+    public :
+        void processPayment() override{cout<<"Processing CreditCardPayment"<<endl;}
+};
+
+int main() {
+    Payment *p = new CreditCardPayment();
+    p->processPayment();
+    p = new DebitCardPayment();
+    p->processPayment();  
     return 0;
 }

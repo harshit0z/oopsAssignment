@@ -1,29 +1,18 @@
 #include <iostream>
 using namespace std;
 
-class Animal {
+class Base {
 public:
-    virtual void sound()=0;
-    virtual ~Animal(){}
+    virtual ~Base() { cout<<"Base destructor"<<endl; }
 };
 
-class Mammal: virtual public Animal {
+class Derived : public Base {
 public:
-    void sound(){ cout<<"Mammal sound"<<endl; }
+    ~Derived() { cout<<"Derived destructor"<<endl; }
 };
 
-class WingedAnimal: virtual public Animal {
-public:
-    void sound(){ cout<<"Winged animal sound"<<endl; }
-};
-
-class Bat: public Mammal, public WingedAnimal {
-public:
-    void sound(){ cout<<"Bat sound"<<endl; }
-};
-
-int main(){
-    Bat b;
-    b.sound();
+int main() {
+    Base* b = new Derived();
+    delete b;
     return 0;
 }

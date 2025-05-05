@@ -1,29 +1,13 @@
 #include <iostream>
+
 using namespace std;
 
-bool func(int);
+int prod(int, int);
 
-int main(){
-    
-    bool prime = func(4);
-    if(prime){
-        cout<<"Number is prime";
-    }else{
-        cout<<"Number is not prime";
-    }
-
+int main() {
+    cout<<"Product = "<<prod(5, 3);
     return 0;
 }
 
 
-bool func(int num){
-    if (num <= 1) return false;
-
-    for (int i = 2; i<=num/2;i++){
-        if (num%i == 0){
-            return false;
-        }
-    }
-
-    return true;
-}
+int prod(int a, int b){return a*b;}

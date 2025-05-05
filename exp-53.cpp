@@ -1,18 +1,32 @@
 #include <iostream>
-#include <cmath>
 
 using namespace std;
 
-int main() {
-    int bin = 1001, current=0, dec=0, count=0;
+class Employee{
 
-    while(bin!=0){
-        current = bin%10;
-        dec += pow(2, count) * current;
-        bin /= 10;
-        count++;
+    public:
+        virtual void work() = 0;
+};
+
+class Manager:public Employee{
+    public :
+    void work() override{
+        cout<<"Manager is chilling"<<endl;
     }
+};
 
-    cout<<dec;
+class Worker: public Employee{
+    public:
+        void work() override{
+            cout<<"Worker is working for dihadi";
+        }
+};
+
+int main() {
+    Manager m;
+    Worker w;
+
+    m.work();
+    w.work();
     return 0;
 }

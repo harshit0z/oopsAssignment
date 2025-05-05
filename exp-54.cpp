@@ -2,28 +2,14 @@
 
 using namespace std;
 
-class Person{
-    string name;
-    int age;
-
-    public:
-    void setName(string name){
-        this->name = name;
-    }
-    void setAge(int age){
-        this->age = age;
-    }
-
-    void getAge(){cout<<"Age = "<<age<<endl;}
-    void getName(){cout<<"Name = "<<name<<endl;}
-
-};
 
 int main() {
-    Person p;
-    p.setAge(18);
-    p.setName("Nikhil");
-    p.getName();
-    p.getAge();
+    int arr[5] = {0,1,2,3,4};
+    int *p = arr;  
+    
+    for (int i = 0; i<5; i++){
+        cout<<*p<<endl;
+        p++;
+    }
     return 0;
 }

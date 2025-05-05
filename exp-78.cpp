@@ -1,38 +1,34 @@
 #include <iostream>
 using namespace std;
 
-class Animal {
+template <typename T>
+class Stack {
+    int top;
+    T arr[100];
 public:
-    virtual void sound()=0;
-    virtual ~Animal(){}
-};
-
-class Dog: public Animal {
-public:
-    void sound(){ cout<<"Woof"<<endl; }
-};
-
-class Cat: public Animal {
-public:
-    void sound(){ cout<<"Meow"<<endl; }
-};
-
-class Bird: public Animal {
-public:
-    void sound(){ cout<<"Chirp"<<endl; }
+    Stack():top(-1){}
+    void push(T val) {
+        if(top==99) return;
+        arr[++top]=val;
+    }
+    void pop() {
+        if(top==-1) return;
+        top--;
+    }
+    void display() {
+        for(int i=top;i>=0;i--)
+            cout<<arr[i]<<" ";
+        cout<<endl;
+    }
 };
 
 int main(){
-    Animal* a1=new Dog();
-    Animal* a2=new Cat();
-    Animal* a3=new Bird();
-
-    a1->sound();
-    a2->sound();
-    a3->sound();
-
-    delete a1;
-    delete a2;
-    delete a3;
+    Stack<int> s;
+    s.push(1);
+    s.push(2);
+    s.push(3);
+    s.display();
+    s.pop();
+    s.display();
     return 0;
 }

@@ -1,17 +1,19 @@
 #include <iostream>
 using namespace std;
 
-class Account {
-    int balance;
+class A {
 public:
-    Account(int b=0):balance(b){}
-    void setBalance(int b){ balance=b; }
-    int getBalance(){ return balance; }
+    void show() { cout << "Class A" << endl; }
 };
 
-int main(){
-    Account a;
-    a.setBalance(1000);
-    cout<<a.getBalance()<<endl;
+class B : virtual public A {};
+
+class C : virtual public A {};
+
+class D : public B, public C {};
+
+int main() {
+    D d;
+    d.show();
     return 0;
 }

@@ -1,22 +1,16 @@
 #include <iostream>
 using namespace std;
 
-class Vector {
-    int* arr;
-    int size;
-public:
-    Vector(int s):size(s){ arr=new int[size]; }
-    ~Vector(){ delete[] arr; }
-    int& operator[](int i){ return arr[i]; }
-};
-
 int main(){
-    Vector v(3);
-    v[0]=10;
-    v[1]=20;
-    v[2]=30;
-    cout<<v[0]<<endl;
-    cout<<v[1]<<endl;
-    cout<<v[2]<<endl;
+    try {
+        int choice;
+        cin >> choice;
+        if(choice == 1) throw 10;
+        else if(choice == 2) throw 3.14;
+        else if(choice == 3) throw "Error occurred";
+    }
+    catch(int e) { cout << "Caught int: " << e << endl; }
+    catch(double e) { cout << "Caught double: " << e << endl; }
+    catch(const char* e) { cout << "Caught string: " << e << endl; }
     return 0;
 }

@@ -1,21 +1,34 @@
 #include <iostream>
+
 using namespace std;
 
-class Point {
-    int x,y;
-public:
-    Point():x(0),y(0){}
-    Point(int a,int b):x(a),y(b){}
-    Point(const Point& p):x(p.x),y(p.y){}
-    void show(){cout<<x<<" "<<y<<endl;}
+class Account{
+
+    public:
+        virtual void calculateInterest() = 0; 
 };
 
-int main(){
-    Point p1;
-    Point p2(5,10);
-    Point p3=p2;
-    p1.show();
-    p2.show();
-    p3.show();
+class SavingsAccount: public Account{
+    public:
+        void calculateInterest() override{
+            cout<<"Interestd of SavingsAccount = 354.05"<<endl;
+        }
+};
+
+class CurrentAccount: public Account{
+    public:
+        void calculateInterest() override{
+            cout<<"Interest of CurrentAccount = 687.41"<<endl;
+        }
+};
+
+
+int main() {
+    Account *a = new SavingsAccount();
+    a->calculateInterest();
+    a = new CurrentAccount();
+    a->calculateInterest();
+
+    delete a;
     return 0;
 }

@@ -1,22 +1,17 @@
 #include <iostream>
-#include <cmath> 
+
 using namespace std;
 
+void printArray(int arr[], int s);
 
-
-int main(){
-    
-    int binary = 111, current=0, index=0, num=0;
-    while(binary!=0){
-        current = binary%10;
-        num += pow(2, index) * current;
-
-        binary/=10;
-        index++;
-    }
-    cout<<num;
-
-
+int main() {
+    int arr[5] = {8,2,4,5,7};
+    int size  = sizeof(arr)/sizeof(arr[0]);
+    printArray(arr, size);
     return 0;
 }
 
+
+void printArray(int arr[], int s){
+    for (int i=0;i<s; i++) cout<<arr[i]<<endl;
+}

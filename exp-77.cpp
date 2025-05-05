@@ -1,38 +1,32 @@
 #include <iostream>
 using namespace std;
 
-class Shape {
-public:
-    virtual void draw()=0;
-    virtual ~Shape(){}
-};
+template <typename T>
+int linearSearch(T arr[], int size, T key) {
+    for(int i = 0; i < size; i++) {
+        if(arr[i] == key) {
+            return i; // Return the index of the found element
+        }
+    }
+    return -1; // Return -1 if the element is not found
+}
 
-class Circle: public Shape {
-public:
-    void draw(){ cout<<"Circle"<<endl; }
-};
+int main() {
+    int intArray[] = {1, 2, 3, 4, 5};
+    double doubleArray[] = {1.1, 2.2, 3.3, 4.4, 5.5};
+    char charArray[] = {'a', 'b', 'c', 'd', 'e'};
 
-class Rectangle: public Shape {
-public:
-    void draw(){ cout<<"Rectangle"<<endl; }
-};
+    int intKey = 3;
+    double doubleKey = 4.4;
+    char charKey = 'c';
 
-class Triangle: public Shape {
-public:
-    void draw(){ cout<<"Triangle"<<endl; }
-};
+    int intIndex = linearSearch(intArray, 5, intKey);
+    int doubleIndex = linearSearch(doubleArray, 5, doubleKey);
+    int charIndex = linearSearch(charArray, 5, charKey);
 
-int main(){
-    Shape* s1=new Circle();
-    Shape* s2=new Rectangle();
-    Shape* s3=new Triangle();
+    cout << "Index of " << intKey << " in intArray: " << intIndex << endl;
+    cout << "Index of " << doubleKey << " in doubleArray: " << doubleIndex << endl;
+    cout << "Index of " << charKey << " in charArray: " << charIndex << endl;
 
-    s1->draw();
-    s2->draw();
-    s3->draw();
-
-    delete s1;
-    delete s2;
-    delete s3;
     return 0;
 }

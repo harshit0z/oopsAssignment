@@ -1,15 +1,26 @@
 #include <iostream>
-#include <cmath> 
+
 using namespace std;
 
+void modi(int arr[], int s);
 
+int main() {
+    int arr[5] = {1,2,3,4,5};
+    int size = (sizeof(arr)/sizeof(arr[0]));
 
-int main(){
-    int arr[11] = {6845,54,54,541,54,54,5521,24,1522,10,14470};
-    int max = arr[0];
-    for (int i = 0 ; i<sizeof(arr)/sizeof(int); i++) if (max<arr[i]) max = arr[i];
-    
-    cout<<max;
+    for (int i = 0; i<size; i++) cout<<arr[i]<<" ";
+
+    modi(arr, size);
+    cout<<endl;
+    for (int i = 0; i<size; i++) cout<<arr[i]<<" ";
+
 
     return 0;
+}
+
+void modi(int arr[], int s){
+    cout<<endl<<"Modifing"<<endl;
+    for (int i = 0; i<s; i++){
+        arr[i] += 10;
+    }
 }

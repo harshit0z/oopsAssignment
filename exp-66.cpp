@@ -1,29 +1,28 @@
 #include <iostream>
+
 using namespace std;
 
-class Matrix {
-    int rows,cols;
-    int** mat;
-public:
-    Matrix(int r,int c):rows(r),cols(c){
-        mat=new int*[rows];
-        for(int i=0;i<rows;i++){
-            mat[i]=new int[cols];
-            for(int j=0;j<cols;j++)
-                mat[i][j]=0;
-        }
-    }
-    void show(){
-        for(int i=0;i<rows;i++){
-            for(int j=0;j<cols;j++)
-                cout<<mat[i][j]<<" ";
-            cout<<endl;
-        }
-    }
+class Media{
+
+    public:
+        virtual void show(){cout<<"Media class"<<endl;} 
 };
 
-int main(){
-    Matrix m(3,3);
-    m.show();
+class DVD: public Media{
+    public:
+        void show() override{cout<<"DVD class"<<endl;}
+};
+class Book:public Media{
+    public :
+        void show() override{cout<<"Book class"<<endl;}
+};
+
+int main() {
+    Media *m;
+    m->show();
+    m = new Book();
+    m->show();
+    m = new DVD();
+    m->show();
     return 0;
 }

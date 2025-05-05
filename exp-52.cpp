@@ -1,20 +1,41 @@
 #include <iostream>
+
 using namespace std;
 
+class Animal{
 
+    public:
+        virtual void speak() = 0;
+};
 
-int main(){
-    string str= "nikhil";
-    int vow=0, con=0;
-
-    for (int i = 0 ; i<str.size(); i++){
-        if (str[i] == 'a' || str[i] == 'e'|| str[i] == 'i' || str[i] == 'o' || str[i] == 'u'){
-            vow++;
-            continue;
+class Dog: public Animal{
+    public :
+        void speak() override{
+            cout<<"Bhau Bhau"<<endl;
         }
-        con++;
-    }
+};
 
-    cout<<"Vowels = "<<vow<<endl<<"consonants = "<<con;
+class Cat: public Animal{
+    public :
+        void speak() override{
+            cout<<"Meow Meow"<<endl;
+        }
+};
+
+class Bird: public Animal{
+    public :
+        void speak() override{
+            cout<<"iiiii iiii iii ii "<<endl;
+        }
+};
+
+
+int main() {
+    Dog d;
+    Cat c;
+    Bird b;
+    d.speak();
+    c.speak();
+    b.speak();   
     return 0;
 }

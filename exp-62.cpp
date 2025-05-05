@@ -1,14 +1,19 @@
 #include <iostream>
+
 using namespace std;
 
-class Math {
-public:
-    static int add(int a, int b) { return a + b; }
-    static int sub(int a, int b) { return a - b; }
+class Counter{
+
+    public:
+        void comp(Counter *o){
+            if(this == o){cout<<"Same object"<<endl;}
+            else{cout<<"Different Objects";}
+        }
 };
 
 int main() {
-    cout << Math::add(5, 3) << endl;
-    cout << Math::sub(5, 3) << endl;
+    Counter c1, c2;
+    c1.comp(&c1);
+    c1.comp(&c2);
     return 0;
 }

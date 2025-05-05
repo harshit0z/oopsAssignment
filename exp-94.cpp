@@ -1,30 +1,32 @@
 #include <iostream>
-#include <string>
 using namespace std;
 
-class BigNumber {
-    string num;
+class Base {
 public:
-    BigNumber(string s):num(s){}
-    BigNumber add(const BigNumber& b) {
-        string a=num, c=b.num;
-        string res="";
-        int i=a.size()-1, j=c.size()-1, carry=0;
-        while(i>=0 || j>=0 || carry){
-            int x = i>=0 ? a[i--]-'0' : 0;
-            int y = j>=0 ? c[j--]-'0' : 0;
-            int sum = x+y+carry;
-            carry = sum/10;
-            res = char(sum%10+'0')+res;
-        }
-        return BigNumber(res);
-    }
-    void show(){ cout<<num<<endl; }
+    virtual void show() { cout<<"Base class"<<endl; }
 };
 
-int main(){
-    BigNumber b1("9999999999999999999999999"), b2("1");
-    BigNumber b3 = b1.add(b2);
-    b3.show();
+class Derived1: public Base {
+public:
+    void show() override { cout<<"Derived1 class"<<endl; }
+};
+
+class Derived2: public Base {
+public:
+    void show() override { cout<<"Derived2 class"<<endl; }
+};
+
+void display(Base* b) {
+    b->show();
+}
+
+int main() {
+    Base b;
+    Derived1 d1;
+    Derived2 d2;
+
+    display(&b);
+    display(&d1);
+    display(&d2);
     return 0;
 }

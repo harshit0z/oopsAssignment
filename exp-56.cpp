@@ -2,27 +2,20 @@
 
 using namespace std;
 
-class Car{
-
-    string make, model;
-    int year;
-
-
-    public:
-    Car(string make, string model, int year): make(make), model(model), year(year){};
-
-    void getMake(){
-        cout<<"Make = "<<make<<endl;
-    }
-    void getModel(){cout<<"Model = "<<model<<endl;}
-
-    void getYear(){cout<<"Year = "<<year;}
-};
+void swap(int *, int *);
 
 int main() {
-    Car c("Gaya bhusa", "Yadavji", 1857);
-    c.getMake();
-    c.getModel();
-    c.getYear();
+    int a = 2, b = 5;
+    cout<<"a = "<<a<<" b = "<<b<<endl;
+    swap(&a, &b);
+    cout<<"a = "<<a<<" b = "<<b;
+    
     return 0;
+}
+
+void swap(int *a, int * b){
+    int temp = *a;
+    *a = *b;
+    *b = temp;
+    cout<<"Swaped"<<endl;
 }

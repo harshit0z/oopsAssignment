@@ -1,33 +1,44 @@
 #include <iostream>
+#include <vector>
 using namespace std;
 
-class Network {
-    int packetCount;
+class Animal {
 public:
-    Network():packetCount(0){}
-    void sendPacket() {
-        packetCount++;
-        cout<<"Packet "<<packetCount<<" sent"<<endl;
-    }
-    void receivePacket() {
-        if(packetCount>0) {
-            cout<<"Packet "<<packetCount<<" received"<<endl;
-            packetCount--;
-        } else {
-            cout<<"No packets to receive"<<endl;
-        }
-    }
-    int getPendingPackets() { return packetCount; }
+    virtual void sound() = 0;
+    virtual void move() = 0;
+    virtual ~Animal() {}
 };
 
-int main(){
-    Network net;
-    net.sendPacket();
-    net.sendPacket();
-    cout<<"Pending: "<<net.getPendingPackets()<<endl;
-    net.receivePacket();
-    net.receivePacket();
-    net.receivePacket();
-    cout<<"Pending: "<<net.getPendingPackets()<<endl;
+class Lion : public Animal {
+public:
+    void sound() override { cout << "Lion roars" << endl; }
+    void move() override { cout << "Lion prowls" << endl; }
+};
+
+class Bird : public Animal {
+public:
+    void sound() override { cout << "Bird chirps" << endl; }
+    void move() override { cout << "Bird flies" << endl; }
+};
+
+class Fish : public Animal {
+public:
+    void sound() override { cout << "Fish blubs" << endl; }
+    void move() override { cout << "Fish swims" << endl; }
+};
+
+int main() {
+    vector<Animal*> ecosystem;
+    ecosystem.push_back(new Lion());
+    ecosystem.push_back(new Bird());
+    ecosystem.push_back(new Fish());
+
+    for(Animal* a : ecosystem) {
+        a->sound();
+        a->move();
+    }
+
+    for(Animal* a : ecosystem) delete a;
+
     return 0;
 }

@@ -1,20 +1,16 @@
 #include <iostream>
 using namespace std;
 
-class Employee {
-public:
-    virtual void work() { cout<<"Employee working"<<endl; }
-    virtual ~Employee(){}
-};
+void callbackFunc() {
+    cout<<"Callback called"<<endl;
+}
 
-class Manager: public Employee {
-public:
-    void work() override { cout<<"Manager managing"<<endl; }
-};
+void performAction(void (*cb)()) {
+    cout<<"Performing action..."<<endl;
+    cb();
+}
 
-int main(){
-    Employee* e=new Manager();
-    e->work();
-    delete e;
+int main() {
+    performAction(callbackFunc);
     return 0;
 }

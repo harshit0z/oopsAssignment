@@ -1,26 +1,46 @@
 #include <iostream>
-#include <cstring> 
+#include <vector>
 using namespace std;
 
-class Game {
-    int score;
+class Widget {
 public:
-    Game():score(0){}
-    
-    void playerAction(const char* action) {
-        if(strcmp(action, "hit") == 0) score += 10;
-        else if(strcmp(action, "miss") == 0) score -= 5;
-        else if(strcmp(action, "bonus") == 0) score += 20;
+    virtual void draw() = 0;
+    virtual void click() = 0;
+    virtual ~Widget() {}
+};
+
+class Button : public Widget {
+public:
+    void draw() override { cout << "Drawing Button" << endl; }
+    void click() override { cout << "Button clicked" << endl; }
+};
+
+class TextBox : public Widget {
+public:
+    void draw() override { cout << "Drawing TextBox" << endl; }
+    void click() override { cout << "TextBox clicked" << endl; }
+};
+
+class GUI {
+    vector<Widget*> widgets;
+public:
+    void addWidget(Widget* w) { widgets.push_back(w); }
+    void render() {
+        for (auto w : widgets) w->draw();
     }
-    
-    int getScore() { return score; }
+    void clickAll() {
+        for (auto w : widgets) w->click();
+    }
+    ~GUI() {
+        for (auto w : widgets) delete w;
+    }
 };
 
 int main() {
-    Game g;
-    g.playerAction("hit");
-    g.playerAction("bonus");
-    g.playerAction("miss");
-    cout << g.getScore() << endl; // Output the score
+    GUI gui;
+    gui.addWidget(new Button());
+    gui.addWidget(new TextBox());
+    gui.render();
+    gui.clickAll();
     return 0;
 }

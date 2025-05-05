@@ -1,19 +1,19 @@
 #include <iostream>
+#include <fstream>
 using namespace std;
 
-class Circle {
-    double radius;
-public:
-    Circle(double r):radius(r){}
-    friend double area(Circle&);
-};
-
-double area(Circle& c){
-    return 3.14159*c.radius*c.radius;
-}
-
 int main(){
-    Circle c(5);
-    cout<<area(c)<<endl;
+    try {
+        ifstream fin("input.txt");
+        if(!fin) throw "File not found";
+        string line;
+        while(getline(fin,line)){
+            cout<<line<<endl;
+        }
+        fin.close();
+    }
+    catch(const char* msg){
+        cout<<"Error: "<<msg<<endl;
+    }
     return 0;
 }

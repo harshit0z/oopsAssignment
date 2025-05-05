@@ -1,13 +1,11 @@
 #include <iostream>
+
 using namespace std;
 
-int main(){
-    int sum=0, num=1;
-    while(num<=50){
-        sum += num;
-        num++;
-    }
-    cout<<sum<<endl;
- 
+int main() {
+    int a,b;
+    cout<<"Enter the numbers"<<endl;
+    cin>>a>>b;
+    cout<<"Sum = "<<a+b;
     return 0;
 }

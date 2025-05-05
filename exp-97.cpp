@@ -1,40 +1,33 @@
 #include <iostream>
+#include <stdexcept>
 using namespace std;
 
-class Cache {
-    static const int size = 10;
-    int keys[size];
-    int values[size];
-    int count;
-public:
-    Cache():count(0) {}
-    void store(int key, int value) {
-        for(int i=0;i<count;i++){
-            if(keys[i]==key){
-                values[i]=value;
-                return;
-            }
-        }
-        if(count<size){
-            keys[count]=key;
-            values[count++]=value;
-        }
-    }
-    int retrieve(int key) {
-        for(int i=0;i<count;i++){
-            if(keys[i]==key) return values[i];
-        }
-        return -1;
-    }
-};
+template <typename T>
+T safeDivide(T a, T b) {
+    if(b == 0) throw invalid_argument("Division by zero");
+    return a / b;
+}
 
-int main(){
-    Cache c;
-    c.store(1,100);
-    c.store(2,200);
-    cout<<c.retrieve(1)<<endl;
-    cout<<c.retrieve(3)<<endl;
-    c.store(1,150);
-    cout<<c.retrieve(1)<<endl;
+template <typename T>
+T safeSqrt(T a) {
+    if(a < 0) throw invalid_argument("Square root of negative number");
+    T res = 0, step = 0.01;
+    while(res*res < a) res += step;
+    return (res*res - a < a - (res - step)*(res - step)) ? res : res - step;
+}
+
+int main() {
+    try {
+        cout << safeDivide(10, 2) << endl;
+        cout << safeDivide(5, 0) << endl;
+    } catch(const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
+    try {
+        cout << safeSqrt(16) << endl;
+        cout << safeSqrt(-4) << endl;
+    } catch(const exception& e) {
+        cout << "Error: " << e.what() << endl;
+    }
     return 0;
 }

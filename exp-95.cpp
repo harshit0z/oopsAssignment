@@ -1,53 +1,32 @@
 #include <iostream>
-#include <fstream>
+#include <memory>
 using namespace std;
 
-class FileCompressor {
+template <typename T, int Capacity>
+class Container {
+    unique_ptr<T[]> data;
+    int count;
 public:
-    void compress(const char* infile, const char* outfile) {
-        ifstream fin(infile, ios::binary);
-        ofstream fout(outfile, ios::binary);
-        if(!fin || !fout) return;
-        char prev=0, curr;
-        int count=0;
-        bool first=true;
-        while(fin.get(curr)){
-            if(first){
-                prev=curr; count=1; first=false;
-            }
-            else if(curr==prev && count<255) count++;
-            else{
-                fout.put(count);
-                fout.put(prev);
-                prev=curr;
-                count=1;
-            }
-        }
-        if(!first){
-            fout.put(count);
-            fout.put(prev);
-        }
-        fin.close();
-        fout.close();
+    Container(): data(new T[Capacity]), count(0) {}
+    bool add(const T& val) {
+        if(count == Capacity) return false;
+        data[count++] = val;
+        return true;
     }
-    void decompress(const char* infile, const char* outfile) {
-        ifstream fin(infile, ios::binary);
-        ofstream fout(outfile, ios::binary);
-        if(!fin || !fout) return;
-        char count, ch;
-        while(fin.get(count).get(ch)){
-            for(int i=0;i<(unsigned char)count;i++)
-                fout.put(ch);
-        }
-        fin.close();
-        fout.close();
+    T& get(int index) {
+        if(index < 0 || index >= count) throw out_of_range("Index out of bounds");
+        return data[index];
     }
+    int size() { return count; }
 };
 
 int main() {
-    FileCompressor fc;
-    fc.compress("input.txt","compressed.bin");
-    fc.decompress("compressed.bin","output.txt");
-    cout<<"Compression and decompression done"<<endl;
+    Container<int, 5> c;
+    c.add(10);
+    c.add(20);
+    c.add(30);
+    for(int i = 0;i < c.size(); i++)
+        cout << c.get(i) << " ";
+    cout << endl;
     return 0;
 }

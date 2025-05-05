@@ -1,14 +1,19 @@
 #include <iostream>
-#include <cmath> 
+
 using namespace std;
 
+void inc(int *);
 
-
-int main(){
-    int sum = 0;
-    for(int i = 0; i<=100;i=i+2)sum += i ;
-    cout<<sum;
+int main() {
+    int a = 13;
+    cout<<"A = "<<a<<endl;
+    inc(&a);
+    cout<<"A = "<<a<<endl;
     
-
     return 0;
+}
+
+void inc(int *a){
+    *a += 10;
+    cout<<"Value Increased"<<endl;
 }
